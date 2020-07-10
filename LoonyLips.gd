@@ -21,7 +21,6 @@ func set_random_story():
         '5b143f94-4859-4c97-8107-b64d9149b3a1',
         'e9f1629d-7730-4941-abbb-494ce5ea8848']
     
-    var authToken = '1c8bbdf6-6771-4783-9139-dc1c1dc2e22d'
     var url = "https://49f3af70-d613-4697-9554-73daf8970550-us-east1.apps.astra.datastax.com/api/rest/v1/keyspaces/demo/tables/stories/rows/"
 
     var headers = [
