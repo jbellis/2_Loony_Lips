@@ -19,10 +19,6 @@ config/name="Loony_Lips"
 run/main_scene="res://LoonyLips.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-Uuid="*res://uuid.gd"
-
 [display]
 
 window/size/width=1080
