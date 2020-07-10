@@ -13,17 +13,10 @@ func _ready():
 
 
 func set_random_story():
-    var story_ids = [
-        '6d934ec0-4ce4-4f8a-9fc6-75bb07e504c2', 
-        'ada0b51b-b07c-4742-94ef-d697fbf67775', 
-        '9dbb1d77-a2e9-4169-833b-59266554fc8a',
-        '3787865d-95bd-4c56-b98b-8228be4c6aa3',
-        '5b143f94-4859-4c97-8107-b64d9149b3a1',
-        'e9f1629d-7730-4941-abbb-494ce5ea8848']
-    
-    var authToken = '1c8bbdf6-6771-4783-9139-dc1c1dc2e22d'
-    var url = "https://49f3af70-d613-4697-9554-73daf8970550-us-east1.apps.astra.datastax.com/api/rest/v1/keyspaces/demo/tables/stories/rows/"
-
+    var uuid = Uuid.v4()
+    print(uuid)
+    var url = "https://49f3af70-d613-4697-9554-73daf8970550-us-east1.apps.astra.datastax.com/api/rest/v1/keyspaces/demo/tables/stories/rows/query"
+    var payload = "{\"filters\":[{\"value\":[\"%s\"],\"columnName\":\"id\",\"operator\":\"gt\"}],\"pageSize\":1}" % [uuid]
     var headers = [
         'accept: application/json',
         'x-cassandra-token: 1c8bbdf6-6771-4783-9139-dc1c1dc2e22d',
@@ -32,7 +25,7 @@ func set_random_story():
     ]
 
     $HTTPRequest.connect("request_completed", self, "_on_request_completed")
-    $HTTPRequest.request(url + story_ids[randi() % story_ids.size()], headers)
+    $HTTPRequest.request(url, headers, true, HTTPClient.METHOD_POST, payload)
 
 func _on_request_completed(result, response_code, headers, body):
     var json = JSON.parse(body.get_string_from_utf8())
